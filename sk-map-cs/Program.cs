@@ -36,6 +36,12 @@ using Microsoft.Extensions.VectorData;
 using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Embeddings;
 
+#pragma warning disable SKEXP0070 
+#pragma warning disable SKEXP0010 
+#pragma warning disable SKEXP0040 
+#pragma warning disable SKEXP0001
+#pragma warning disable SKEXP0020 
+
 Env.Load();
 
 var AOAI_DEP_NAME = Env.GetString("AOAI_DEP_NAME");
@@ -58,13 +64,10 @@ var OLLAMA_URI = new Uri(Env.GetString("OLLAMA_URI"));
 var ONNX_MODEL_ID = Env.GetString("ONNX_MODEL_ID");
 var ONNX_MODEL_PATH = Env.GetString("ONNX_MODEL_PATH");
 
-#pragma warning disable SKEXP0070 //TODO  remove these and track bugs
-#pragma warning disable SKEXP0010 
-#pragma warning disable SKEXP0040 
-#pragma warning disable SKEXP0001
-#pragma warning disable SKEXP0020 
+
 
 #region Kernel
+//https://aka.ms/sk/kernel
 
 // Create a new Kernel builder
 IKernelBuilder builder = Kernel.CreateBuilder();
@@ -72,7 +75,7 @@ IKernelBuilder builder = Kernel.CreateBuilder();
 
 #region AI services
 // Add AI services
-// https:// aka.ms/sk/aiservices
+// https://aka.ms/sk/aiservices
 // Semantic Kernel allows you to add and swap out different AI services depending on your needs. In addition to Azure OpenAI and OpenAI, Semantic Kernel supports Google Gemini, MistralAI, Ollama, local models, and more
 
 // Azure OpenAI example
@@ -97,7 +100,7 @@ builder.AddOpenAIChatCompletion(OAI_MODEL_NAME, OAI_KEY);
 #endregion
 #region Plugins
 // Add plugins
-// https:// aka.ms/sk/plugins
+// https://aka.ms/sk/plugins
 // Plugins are a way to extend the functionality of the kernel. Plugins are added differently depending on where they are stored.
 
 // Import of OpenAPI (most common)
@@ -136,7 +139,7 @@ Kernel kernel = builder.Build();
 
 #region Memory
 // Add memory
-// https:// aka.ms/sk/memory
+// https://aka.ms/sk/memory
 // Semantic Kernel offers several memory store connectors to vector databases that you can use to store and retrieve information. Including Azure AI Search, Azure SQL Database, Azure CosmosDB, Chroma, DuckDB, Milvus, MongoDB Atlas, Pinecone, Postgres, Qdrant, Redis, Sqlite, Weaviate and more.
 
 // Construct and in-memory vector store
@@ -178,7 +181,7 @@ Console.WriteLine($"Search result (score: {resultRecord.Score}): '{resultRecord.
 
 #region Prompts
 // Prompts
-// https:// aka.ms/sk/prompts  
+// https://aka.ms/sk/prompts  
 // Prompts are a way to interact with the kernel using natural language. Prompts can be used to ask questions, get information, or execute functions.
 
 // Invoke a basic prompt (this prompt will call a function)
@@ -205,11 +208,11 @@ Console.WriteLine(result.ToString());
 #endregion
 #region Chat completion
 // Chat completion
-// https:// aka.ms/sk/chat
+// https://aka.ms/sk/chat
 
 // ChatCompletionService is a common way to interact with the models
 var chatService = kernel.GetRequiredService<IChatCompletionService>();
-var chatHistory = new ChatHistory("You are a librarian, export about books");
+var chatHistory = new ChatHistory("You are a librarian, expert about books");
 
 // Add a user message
 chatHistory.AddUserMessage("Hi, I'm looking for book suggestions");
