@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>sk_map_cs</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.1" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.28.0" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.Google" Version="1.28.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.InMemory" Version="1.28.0-preview" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.MistralAI" Version="1.28.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.28.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.Onnx" Version="1.28.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Plugins.OpenAPI" Version="1.28.0-alpha" />
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="path\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update=".env">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
