@@ -2,3 +2,6 @@
 sk-map-cs/.env
 sk-map-cs/bin
 sk-map-cs/obj
+sample-openapi-weather/obj
+sample-openapi-weather/bin
+

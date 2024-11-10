@@ -103,7 +103,7 @@ builder.AddOpenAIChatCompletion(OAI_MODEL_NAME, OAI_KEY);
 // Import of OpenAPI (most common)
 var plugin = await OpenApiKernelPluginFactory.CreateFromOpenApiAsync(
     pluginName: "WeatherForecast",
-    uri: new Uri($"http://localhost:5195/swagger/v1/swagger.json")
+    uri: new Uri($"http://localhost:5134/swagger/v1/swagger.json")
 );
 builder.Plugins.Add(plugin);
 
@@ -153,14 +153,15 @@ var textEmbeddingService = new AzureOpenAITextEmbeddingGenerationService(AOAI_EM
 
 
 // Generate embeddings
-var tasks = Glossary.ContentEntriesLists().Select(async entry =>
+var entries = Glossary.ContentEntriesLists();
+var tasks = entries.Select(async entry =>
 {
     entry.DefinitionEmbedding = await textEmbeddingService.GenerateEmbeddingAsync(entry.Term);
 });
 await Task.WhenAll(tasks);
 
-// Upsert the entries into the collection an return their keys
-var upsertKeys = await Task.WhenAll(Glossary.ContentEntriesLists().Select(async entry =>
+// Upsert the entries into the collection and return their keys
+var upsertKeys = await Task.WhenAll(entries.Select(async entry =>
 {
     return await collection.UpsertAsync(entry);
 }));
@@ -190,14 +191,16 @@ Console.WriteLine(result.ToString());
 
 // Templated prompt with Kernel arguments
 KernelArguments arguments = new() {{"topic", "Dogs"}};
-await kernel.InvokePromptAsync("Tell me about {{topic}}", arguments);
+result = await kernel.InvokePromptAsync("Tell me about {{$topic}}", arguments);
+Console.WriteLine(result.ToString());
 
 // Define settings for the prompt, this setting will allow the prompt to automatically execute functions
 OpenAIPromptExecutionSettings settings = new () {
     FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
 };
 
-await kernel.InvokePromptAsync("How many days until Christmas? Explain you thinking.", new(settings));
+result = await kernel.InvokePromptAsync("How many days until Christmas? Explain you thinking.", new(settings));
+Console.WriteLine(result.ToString());
 
 #endregion
 #region Chat completion
