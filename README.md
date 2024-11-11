@@ -219,9 +219,10 @@ class PromptRenderLoggingFilter : IPromptRenderFilter
         return renderedPrompt?.Replace("bananas", "*******") ?? string.Empty;
     }
 }
-```csharp
+```
 
 ## Memory data model definitions
+
 ```csharp
 class Glossary
 {
