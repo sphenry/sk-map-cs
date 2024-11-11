@@ -123,7 +123,7 @@ builder.Plugins.AddFromPromptDirectory("path/to/plugins");
 #endregion
 #region Filters
 // Add filters and telemetry
-// https:// aka.ms/sk/filters
+// https://aka.ms/sk/filters
 
 // Set the level of tracing for each service
 ILogger logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger("SemanticKernel");
@@ -180,7 +180,7 @@ Console.WriteLine($"Search result (score: {resultRecord.Score}): '{resultRecord.
 #endregion
 
 #region Prompts
-// Prompts
+// Create prompts and invoke
 // https://aka.ms/sk/prompts  
 // Prompts are a way to interact with the kernel using natural language. Prompts can be used to ask questions, get information, or execute functions.
 
